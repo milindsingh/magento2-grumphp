@@ -1,5 +1,5 @@
 # Magento2 GrumPHP
-GrumPHP configuration for Magento 2 Automated Quality Check
+GrumPHP configuration for Magento 2 Module Automated Quality Check
 
 ## What is GrumPHP ?
 
@@ -103,7 +103,7 @@ parameters:
 
 #### 2. PHPCS FIXER 2
 
-- Install [PHP Coding Standards Fixer](https://github.com/FriendsOfPHP/PHP-CS-Fixer (skip if already installed) :
+- Install [PHP Coding Standards Fixer](https://github.com/FriendsOfPHP/PHP-CS-Fixer) (skip if already installed) :
  
   `composer require --dev friendsofphp/php-cs-fixer`
 
