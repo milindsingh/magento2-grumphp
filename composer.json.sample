@@ -1,0 +1,23 @@
+{
+    "name": "my-vendor/my-module",
+    "description": "Sample composer file for GrumPHP config in Magento 2 module",
+    "type": "magento2-module",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Milind Singh",
+            "email": "milind7@live.com"
+        }
+    ],
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "MyVendor\\MyModule\\": ""
+        }
+    },
+    "config": {
+        "bin-dir": "../../../../vendor/bin"
+    }
+}
