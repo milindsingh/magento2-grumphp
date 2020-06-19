@@ -1,0 +1,51 @@
+# Project level GrumPHP configuration for Magento 2
+parameters:
+  git_dir: .
+  root_dir: .
+  bin_dir: '%root_dir%/vendor/bin'
+  hide_circumvention_tip: true
+  process_timeout: 120
+  tasks:
+    composer:
+      file: ./composer.json
+      no_check_all: true
+      no_check_lock: false
+      no_check_publish: false
+      with_dependencies: false
+      strict: false
+    git_blacklist:
+      keywords:
+        - "die("
+        - "var_dump("
+        - "print_r("
+        - "exit;"
+        - "console.log("
+        - "_objectManager"
+        - "ObjectManagerInterface"
+    phpcs:
+      standard: Magento2
+      tab_width: 4
+      severity: 10
+      error_severity: 10
+      warning_severity: ~
+      report: full
+      triggered_by: [phtml, xml, css, js, php]
+    phpcsfixer2:
+      allow_risky: ~
+      cache_file: ~
+      config: '%root_dir%/.php_cs.dist'
+      using_cache: ~
+      verbose: true
+      config_contains_finder: false
+      triggered_by: ['php', 'phtml']
+
+#    phpmd:
+#      ruleset: ['%magento_dir%/dev/tests/static/testsuite/Magento/Test/Php/_files/phpmd/ruleset.xml']
+#    phpstan:
+#      autoload_file: ~
+#      configuration: ~
+#      level: 0
+#      force_patterns: []
+#      ignore_patterns: []
+#      triggered_by: ['php']
+#      memory_limit: "-1"

@@ -9,6 +9,12 @@ GrumPHP configuration for Magento 2 Module Automated Quality Check
 
 - This handy tool will not only improve your codebase, it will also teach your co-workers to write better code following the best practices you've determined as a team.
 
+- GrumPHP can be configured at 2 levels:
+    
+   + module level (`magento-2-root/app/code/MyVendor/MyModule`).
+   
+   + project level (`magento-2-root`).
+
 ## Setup
 
 1. Install GrumPHP by running `composer require --dev phpro/grumphp` or `composer global require --dev phpro/grumphp`
@@ -17,7 +23,7 @@ GrumPHP configuration for Magento 2 Module Automated Quality Check
    
   Goto the module directory and Run: `php vendor/bin/grumphp git:init` or `grumphp git:init`
 
-3. GrumPHP is a task runner and all task needs to be defined via `grumphp.yml` file in the module directory (`app/code/MyVendor/MyModule`).
+3. GrumPHP is a task runner and all task needs to be defined via `grumphp.yml` file in the module directory (`app/code/MyVendor/MyModule`) for module level configuration.
  Use the below example to start with:
 
 ```yaml
