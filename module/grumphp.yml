@@ -19,7 +19,7 @@ parameters:
         - "var_dump("
         - "print_r("
         - "exit;"
-        - "console.log("
+        - "console.log"
         - "_objectManager"
         - "ObjectManagerInterface"
     phpcs:
@@ -33,7 +33,7 @@ parameters:
     phpcsfixer2:
       allow_risky: ~
       cache_file: ~
-      config: '%root_dir%/.php_cs.dist'
+      config: '../../../../.php_cs.dist'
       using_cache: ~
       verbose: true
       config_contains_finder: false
