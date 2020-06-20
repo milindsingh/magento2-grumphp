@@ -1,8 +1,5 @@
 # Project level GrumPHP configuration for Magento 2
-parameters:
-  git_dir: .
-  root_dir: .
-  bin_dir: '%root_dir%/vendor/bin'
+grumphp:
   hide_circumvention_tip: true
   process_timeout: 120
   tasks:

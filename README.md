@@ -27,10 +27,7 @@ GrumPHP configuration for Magento 2 Module Automated Quality Check
  Use the below example to start with:
 
 ```yaml
-parameters:
-  git_dir: .
-  root_dir: ../../../..
-  bin_dir: '%root_dir%/vendor/bin'
+grumphp:
   hide_circumvention_tip: true
   process_timeout: 120
   tasks:
@@ -47,7 +44,7 @@ parameters:
         - "var_dump("
         - "print_r("
         - "exit;"
-        - "console.log("
+        - "console.log"
         - "_objectManager"
         - "ObjectManagerInterface"
     phpcs:
@@ -61,7 +58,7 @@ parameters:
     phpcsfixer2:
       allow_risky: ~
       cache_file: ~
-      config: '%root_dir%/.php_cs.dist'
+      config: '../../../../.php_cs.dist'
       using_cache: ~
       verbose: true
       config_contains_finder: false
