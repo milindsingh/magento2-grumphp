@@ -54,7 +54,7 @@ grumphp:
       error_severity: 10
       warning_severity: ~
       report: full
-      triggered_by: [phtml, xml, css, js, php]
+      triggered_by: [phtml, php]
     phpcsfixer2:
       allow_risky: ~
       cache_file: ~
