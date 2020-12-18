@@ -2,7 +2,28 @@
 grumphp:
   hide_circumvention_tip: true
   process_timeout: 120
+  stop_on_failure: false
+  ignore_unstaged_changes: false
   tasks:
+    jsonlint:
+      detect_key_conflicts: true
+      metadata:
+        priority: 100
+    xmllint:
+      ignore_patterns:
+        - "#test/(.*).xml#"
+      metadata:
+        priority: 100
+    phplint:
+      triggered_by: ['php', 'phtml']
+      metadata:
+        priority: 200
+    yamllint:
+      ignore_patterns:
+        - "#test/(.*).yml#"
+        - "#charts/.*#"
+      metadata:
+        priority: 100
     composer:
       file: ./composer.json
       no_check_all: true
@@ -10,39 +31,104 @@ grumphp:
       no_check_publish: false
       with_dependencies: false
       strict: false
+      metadata:
+        priority: 80
+    # validate git commit message
+    git_commit_message:
+      allow_empty_message: false
+      enforce_capitalized_subject: false
+      enforce_no_subject_punctuations: false
+      enforce_no_subject_trailing_period: true
+      enforce_single_lined_subject: true
+      type_scope_conventions: []
+      max_body_width: 80
+      max_subject_width: 80
+      matchers:
+        "Commit message must contain issue topic and number": /^\[(HOTFIX|BUGFIX|FEATURE|INFRA|MERGE|RELEASE)]\sICRSICRP-\d+\s::\s.*\s\[(COMPLETED|WIP)]/
+      case_insensitive: true
+      multiline: false
+      additional_modifiers: ''
+    # validate git branch names
+    git_branch_name:
+      whitelist:
+        - "/(hotfix|bugfix|feature|release)\\/ICRSICRP\\-([0-9]+)$/"
+      blacklist:
+        - "development"
+        - "production"
+        - "staging"
+        - "master"
+        - "infra"
+      allow_detached_head: true
+    # catch not allowed keywords
     git_blacklist:
       keywords:
+        - "\\.dev"
+        - "\\.local"
+        - "\\.test"
+        - "<<<<<<<"
+        - "======="
+        - "DebuggerUtility"
+        - "ObjectManager::getInstance"
+        - "_GET\\["
+        - "_POST\\["
+        - "_REQUEST\\["
+        - "console.log("
         - "die("
-        - "var_dump("
-        - "print_r("
+        - "die;"
+        - "exit("
         - "exit;"
-        - "console.log"
+        - "fileadmin"
+        - "localhost"
+        - "phpinfo"
+        - "phpinfo("
+        - "print_r("
+        - "var_dump("
         - "_objectManager"
         - "ObjectManagerInterface"
+      triggered_by: ['php', 'js', 'html', 'phtml']
+      metadata:
+        priority: 90
+    # https://devdocs.magento.com/guides/v2.4/coding-standards/code-standard-php.html
     phpcs:
       standard: Magento2
       tab_width: 4
-      severity: 10
+      severity: 10 # can remove this to dis allow all level of severity.
       error_severity: 10
       warning_severity: ~
       report: full
       triggered_by: [phtml, php]
+      metadata:
+        priority: 70
     phpcsfixer2:
-      allow_risky: ~
-      cache_file: ~
+      allow_risky: false
       config: '.php_cs.dist'
-      using_cache: ~
-      verbose: true
-      config_contains_finder: false
       triggered_by: ['php', 'phtml']
+      using_cache: true
+      cache_file: './.php_cs.cache'
+      config_contains_finder: true
+      verbose: true
+    phpmd:
+      ruleset: ['./dev/tests/static/testsuite/Magento/Test/Php/_files/phpmd/ruleset.xml']
+      triggered_by: ['php']
+      exclude:
+        - "./app/code/Magento/"
+        - "./app/code/*/*/Setup/"
+      metadata:
+        priority: 70
+    #  uncomment to skip modules using whitelist patterns
+    #  whitelist_patterns:
+    #     - /^app\/code\/MyVendor\/MyModuleToSkip\/(.*)/
 
-#    phpmd:
-#      ruleset: ['%magento_dir%/dev/tests/static/testsuite/Magento/Test/Php/_files/phpmd/ruleset.xml']
-#    phpstan:
-#      autoload_file: ~
-#      configuration: ~
-#      level: 0
-#      force_patterns: []
-#      ignore_patterns: []
-#      triggered_by: ['php']
-#      memory_limit: "-1"
+    # https://devdocs.magento.com/guides/v2.4/test/testing.html#phpstan
+    phpstan:
+      autoload_file: ~
+      configuration: './dev/tests/static/testsuite/Magento/Test/Php/_files/phpstan/phpstan.neon'
+      level: 8
+      triggered_by: ['php']
+      force_patterns: []
+      ignore_patterns: []
+      memory_limit: "-1"
+      metadata:
+            priority: 90
+    phpversion:
+      project: '7.3'
