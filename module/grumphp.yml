@@ -105,7 +105,8 @@ grumphp:
       triggered_by: ['php', 'phtml']
       using_cache: true
       cache_file: './.php_cs.cache'
-      config_contains_finder: true
+      # config_contains_finder: false - to skip fixing all Magento 2 directory
+      config_contains_finder: false
       verbose: true
     phpmd:
       ruleset: ['../../../../dev/tests/static/testsuite/Magento/Test/Php/_files/phpmd/ruleset.xml']
