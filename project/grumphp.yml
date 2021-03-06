@@ -51,7 +51,8 @@ grumphp:
     # validate git branch names
     git_branch_name:
       whitelist:
-        - "/(hotfix|bugfix|feature|release)\\/ICRSICRP\\-([0-9]+)$/"
+         # allowed branch names: 'feature-1', 'feature-new', 'feature-new1', 'task-1', etc
+        - "/(hotfix|bugfix|feature|release|task)-([a-z|0-9]+)$/"
       blacklist:
         - "development"
         - "production"
